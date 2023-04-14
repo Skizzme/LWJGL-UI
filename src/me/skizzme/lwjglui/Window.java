@@ -111,6 +111,10 @@ public class Window {
     }
 
     public void render(boolean checkFPS) {
+        if (currentScreen == null) {
+            return;
+        }
+
         if (checkFPS && ((double) (System.nanoTime()-currentScreen.lastFrame))/1000000000d < 1d/fps) {
             return;
         }
@@ -163,11 +167,6 @@ public class Window {
         currentScreen.lastFrame = System.nanoTime();
         currentScreen.drawScreen(mouseX, mouseY);
 
-//        System.out.println(1 / ((System.nanoTime()-currentScreen.lastFrame)/1000000d));
-
-        Display.setVSyncEnabled(false);
-//        Display.sync(1000);
-
         this.postRender();
     }
 
@@ -209,7 +208,6 @@ public class Window {
 
         if (System.currentTimeMillis() - lastUpdate > 1000){
             lastUpdate = System.currentTimeMillis();
-//            System.out.println("" + frames);
             frames = 0;
         }
     }

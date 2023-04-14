@@ -17,7 +17,6 @@ public class Main {
 
     public static void loadNatives() throws IOException {
         Path nativesFolder = Files.createTempDirectory("lwjgl_natives");
-        System.out.println(nativesFolder);
         for (String p : nativePaths) {
             InputStream in = Main.class.getResourceAsStream(p);
             byte[] buffer = new byte[1024];

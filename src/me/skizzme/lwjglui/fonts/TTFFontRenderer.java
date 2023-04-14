@@ -83,7 +83,7 @@ public class TTFFontRenderer {
         int[] boldTexturesIds = new int[characterCount];
         int[] italicTexturesIds = new int[characterCount];
         for (int i = 0; i < characterCount; i++) {
-            Window.window().render();
+            Window.window().render(true);
             regularTexturesIds[i] = GL11.glGenTextures();
             boldTexturesIds[i] = GL11.glGenTextures();
             italicTexturesIds[i] = GL11.glGenTextures();
@@ -194,8 +194,8 @@ public class TTFFontRenderer {
         // Puts all the pixel data into the buffer.
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
-                //  Window.window().render();
 
+                Window.window().render(true);
                 // The pixel in the image.
                 int pixel = pixels[y * image.getWidth() + x];
 

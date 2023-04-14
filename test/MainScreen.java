@@ -33,24 +33,24 @@ public class MainScreen extends GuiScreen {
         if (testPos >= 200) {
             testPosState = true;
         }
-//        System.out.println(testPos);
         Render.drawRect(20+testPos, 20, 40+testPos, 30, 0xff404040);
-//        FontUtil.getDefaultFont().drawString("test", 20, 20, 0xffffffff);
+        FontUtil.getDefaultFont().drawString("test", 20, 20, 0xffffffff);
         if (this.startTime == -1) {
             this.startTime = this.lastFrame;
         }
-//        System.out.println(this.lastFrame-this.startTime);
-        if (this.lastFrame-this.startTime > 2000000000 && !loading) {
-            loading = true;
-            for (int i = 20; i < 35; i++) {
-                FontUtil.createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", i);
-                loaded.add(i);
-            }
-        }
+//        FontUtil.getDefaultFont().drawString("" + Math.max(2-((float) (this.lastFrame-this.startTime)/1000000000), 0), 20, 30, 0xffffffff);
+//        if (this.lastFrame-this.startTime > 2000000000 && !loading) {
+//            loading = true;
+//            for (int i = 20; i < 35; i++) {
+//                FontUtil.createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", (int) (i*1.6));
+//                loaded.add(i);
+//            }
+//        }
 
-        for (int i : loaded) {
-            TTFFontRenderer tf = FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", i);
-            tf.drawString("test", 20, 35+loaded.indexOf(i)*10+tf.getHeight("test"), 0xffffffff);
+        // int i : loaded
+        for (int i = 20; i < 35; i++) {
+            TTFFontRenderer tf = FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", (int)(i*1));
+            tf.drawString("test", 20, 35+(i-20)*10+tf.getHeight("test"), 0xffffffff);
         }
     }
 }
