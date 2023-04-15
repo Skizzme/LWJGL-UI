@@ -5,13 +5,13 @@ import me.skizzme.lwjglui.util.Render;
 
 import java.util.function.BiConsumer;
 
-public class Button extends Element {
+public class DefaultButton extends Element {
 
     private BiConsumer<Integer, Boolean> executor;
     private String name;
     private int color, hoverColor;
 
-    public Button(String name, int x, int y, int width, int height, int color, int hoverColor, BiConsumer<Integer, Boolean> executor) {
+    public DefaultButton(String name, int x, int y, int width, int height, int color, int hoverColor, BiConsumer<Integer, Boolean> executor) {
         super(x, y, width, height);
         this.name = name;
         this.color = color;
@@ -29,7 +29,7 @@ public class Button extends Element {
     }
 
     @Override
-    public void click(int button, boolean state) {
+    public void click(int button, boolean state, int mouseX, int mouseY) {
         executor.accept(button, state);
     }
 

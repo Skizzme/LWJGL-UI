@@ -56,19 +56,30 @@ public class Animation {
         animateBiLinear(target, speed, 1);
     }
 
+    public void animateBiLinearNoMaxMin(double target, double speed, double multiplier) {
+        if (maxAnim > 0 && speed > maxAnim) {
+            speed = maxAnim;
+        }
+
+        value += (((target-value)*multiplier)+speed)*Window.getScreen().fps;
+        checkValue();
+    }
+
     public void animateBiLinear(double target, double speed, double multiplier) {
         if (maxAnim > 0 && speed > maxAnim) {
             speed = maxAnim;
         }
 
         if (target < value) {
-            value-=(((value-min)*multiplier)+speed)*Window.getScreen().fps;
+            System.out.println(value-min);
+            value -= (((value-min)*multiplier)+speed)*Window.getScreen().fps;
             if (value < target) {
                 value = target;
             }
         }
         else if (target > value) {
-            value+=(((max-value)*multiplier)+speed)*Window.getScreen().fps;
+            System.out.println(max-value);
+            value += (((max-value)*multiplier)+speed)*Window.getScreen().fps;
             if (value > target) {
                 value = target;
             }

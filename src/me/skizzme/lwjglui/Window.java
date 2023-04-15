@@ -1,6 +1,7 @@
 package me.skizzme.lwjglui;
 
 import me.skizzme.lwjglui.fonts.FontUtil;
+import me.skizzme.lwjglui.keyboard.KeyboardHelper;
 import me.skizzme.lwjglui.mouse.MouseHelper;
 import me.skizzme.lwjglui.util.Render;
 import org.lwjgl.LWJGLException;
@@ -30,7 +31,8 @@ public class Window {
     private boolean borderless;
     public boolean close = false, closeRequested = false;
     private long lastRepeat = System.currentTimeMillis();
-    public int fps = 60;
+    public int fps = 144;
+    private boolean running = false;
 
     public Window(String title, int width, int height, boolean borderless) {
         this.title = title;
@@ -72,7 +74,16 @@ public class Window {
         }
     }
 
-    public static void setScreen(GuiScreen currentScreen) {
+    public void setScreen(GuiScreen currentScreen) {
+        while (!running) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(currentScreen);
+        currentScreen.initGui();
         Window.currentScreen = currentScreen;
         Window.currentScreen.lastFrame = System.nanoTime();
     }
@@ -81,10 +92,10 @@ public class Window {
         return currentScreen;
     }
 
-    public void run(GuiScreen screen) {
-        currentScreen = screen;
+    public void run() {
+        currentScreen = new DefaultScreen(this);
         Render.textures.clear();
-        currentScreen.lastFrame = System.nanoTime();
+        running = true;
         while (!close) {
             if (Display.isCloseRequested()) {
                 closeRequested = true;
@@ -100,10 +111,10 @@ public class Window {
         Display.destroy();
     }
 
-    public void show(GuiScreen screen) {
+    public void show() {
         close = false;
         createDisplay();
-        run(screen);
+        run();
     }
 
     public void render() {
@@ -152,6 +163,7 @@ public class Window {
             int code = Keyboard.getEventKey();
             char key = Keyboard.getEventCharacter();
             boolean state = Keyboard.getEventKeyState();
+            KeyboardHelper.key(code, state);
             currentScreen.keyState(code, key, state);
         }
 

@@ -17,7 +17,7 @@ public abstract class Element {
 
     public abstract void draw(int mouseX, int mouseY);
 
-    public void click(int button, boolean state) {}
+    public void click(int button, boolean state, int mouseX, int mouseY) {}
 
     public void key(int keyCode, char charIn, boolean state) {}
 

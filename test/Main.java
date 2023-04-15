@@ -12,7 +12,8 @@ public class Main {
 //        loadJarDll("lwjgl.dll");
         if ((args.length > 0 && !args[0].equals("no_natives") || args.length == 0)) loadNatives();
         Window w = new Window("test", 1920/2, 1080/2, true);
-        w.show(new MainScreen(w));
+        new Thread(w::show).start();
+        w.setScreen(new MainScreen(w));
     }
 
     public static void loadNatives() throws IOException {
