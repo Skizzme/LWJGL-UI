@@ -1,5 +1,6 @@
 import me.skizzme.lwjglui.GuiScreen;
 import me.skizzme.lwjglui.Window;
+import me.skizzme.lwjglui.elements.impl.Textbox;
 import me.skizzme.lwjglui.fonts.FontUtil;
 import me.skizzme.lwjglui.fonts.TTFFontRenderer;
 import me.skizzme.lwjglui.util.Render;
@@ -16,6 +17,7 @@ public class MainScreen extends GuiScreen {
 
     public MainScreen(Window window) {
         super(window);
+        this.elements.add(new Textbox(50, 50, 100, 20));
     }
 
     @Override

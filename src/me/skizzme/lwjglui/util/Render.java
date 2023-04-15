@@ -74,7 +74,7 @@ public class Render {
     public static void drawTexture(String asset, double left, double top, double right, double bottom, int tint) {
         try {
             if (textures.get(asset) == null) {
-                InputStream stream = Render.class.getResourceAsStream("/assets/" + asset);
+                InputStream stream = Render.class.getResourceAsStream(asset);
                 if (stream == null) {
                     System.err.println("Couldn't load asset \"" + asset + "\"");
                     return;

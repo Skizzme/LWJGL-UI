@@ -36,7 +36,9 @@ public abstract class GuiScreen {
     }
 
     public void keyState(int keyCode, char charIn, boolean state) {
-
+        for (Element element : elements) {
+            if (element.isSelected()) element.key(keyCode, charIn, state);
+        }
     }
 
     public void mouseMove(int mouseX, int mouseY) {
