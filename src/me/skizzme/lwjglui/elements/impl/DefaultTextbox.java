@@ -33,12 +33,7 @@ public class DefaultTextbox extends Element {
         tf.drawString(input, x+2, y, -1);
         float st = tf.getWidth(input.substring(0, caretPosition))-2;
         caretAnimation.animateBiLinearNoMaxMin(x+st, 0.001, 1);
-//        System.out.println(caretAnimation.getValue());
         if ((System.currentTimeMillis()-this.last_type_time) % 1000 < 500) Render.drawRect(caretAnimation.getValue()+1, y, caretAnimation.getValue()+1.5, y+tf.getHeight("a"), -1);
-        //205 = right
-        //203 = left
-        // 200 = top
-        // 208 = bottom
     }
 
     private int[] getCtrlDeleteWord() {
@@ -67,7 +62,7 @@ public class DefaultTextbox extends Element {
         System.out.println(keyCode);
         if (pressed) {
             this.last_type_time = System.currentTimeMillis();
-            //
+
             if (keyCode == 205) {
                 caretPosition++;
                 caretPosition = Math.min(caretPosition, input.length());
@@ -90,7 +85,7 @@ public class DefaultTextbox extends Element {
                         input = input.substring(0, caretPosition) + input.substring(caretPosition+1);
                     }
                 }
-//                System.out.println((charIn == ' ' && keyCode != 57));
+
                 if (keyCode != 14 && keyCode != 211 && Character.getType(charIn) != 15) {
                     if (KeyboardHelper.ctrl()) return;
                     input = input.substring(0, caretPosition) + charIn + input.substring(caretPosition);
