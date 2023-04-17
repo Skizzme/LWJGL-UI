@@ -59,7 +59,7 @@ public class DefaultTextbox extends Element {
     @Override
     public void key(int keyCode, char charIn, boolean pressed) {
         caretPosition = Math.max(caretPosition, 0);
-        System.out.println(keyCode);
+
         if (pressed) {
             this.last_type_time = System.currentTimeMillis();
 

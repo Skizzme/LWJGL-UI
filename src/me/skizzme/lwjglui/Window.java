@@ -82,7 +82,6 @@ public class Window {
                 e.printStackTrace();
             }
         }
-        System.out.println(currentScreen);
         currentScreen.initGui();
         Window.currentScreen = currentScreen;
         Window.currentScreen.lastFrame = System.nanoTime();

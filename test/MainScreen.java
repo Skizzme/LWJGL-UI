@@ -1,6 +1,7 @@
 import me.skizzme.lwjglui.GuiScreen;
 import me.skizzme.lwjglui.Window;
 import me.skizzme.lwjglui.elements.impl.DefaultCheckbox;
+import me.skizzme.lwjglui.elements.impl.DefaultLoadbar;
 import me.skizzme.lwjglui.elements.impl.DefaultMultipleChoice;
 import me.skizzme.lwjglui.elements.impl.DefaultTextbox;
 import me.skizzme.lwjglui.fonts.FontUtil;
@@ -15,6 +16,9 @@ public class MainScreen extends GuiScreen {
     private boolean testPosState = false, loading = false;
     private ArrayList<Integer> loaded = new ArrayList<>();
     private long startTime = -1;
+    private float value = 0;
+    private long lastSet = System.currentTimeMillis();
+    private DefaultLoadbar loadbar;
 
     public MainScreen(Window window) {
         super(window);
@@ -25,6 +29,8 @@ public class MainScreen extends GuiScreen {
         this.elements.add(new DefaultTextbox(-2, 0xff606060, 50, 50, 100, 20));
         this.elements.add(new DefaultCheckbox("Test", -1, 0xff606060, -1, false, 50, 80, 10, 10));
         this.elements.add(new DefaultMultipleChoice(-1, 0xff606060, -1, -1, 100, 80, 10, 10, "op1", "op2", "op3"));
+        this.loadbar = new DefaultLoadbar(0, -1, 0xff606060, 50, 120, 100, 10);
+        this.elements.add(loadbar);
     }
 
     @Override
@@ -46,6 +52,12 @@ public class MainScreen extends GuiScreen {
         FontUtil.getDefaultFont().drawString("test", 20, 20, 0xffffffff);
         if (this.startTime == -1) {
             this.startTime = this.lastFrame;
+        }
+        if (System.currentTimeMillis()-lastSet >= 5000) {
+            value+=0.1;
+            System.out.println(value);
+            this.loadbar.update(value);
+            lastSet = System.currentTimeMillis();
         }
 //        FontUtil.getDefaultFont().drawString("" + Math.max(2-((float) (this.lastFrame-this.startTime)/1000000000), 0), 20, 30, 0xffffffff);
 //        if (this.lastFrame-this.startTime > 2000000000 && !loading) {

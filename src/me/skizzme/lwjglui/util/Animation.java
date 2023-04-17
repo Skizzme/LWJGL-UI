@@ -29,11 +29,12 @@ public class Animation {
 
         if (target < value) {
             value-=speed;
+            checkValue(false, target);
         }
         else if (target > value) {
             value+=speed;
+            checkValue(true, target);
         }
-        checkValue();
     }
 
     public void animateLinear(double target, double speed) {
@@ -45,11 +46,12 @@ public class Animation {
 
         if (target < value) {
             value-=speed;
+            checkValue(false, target);
         }
         else if (target > value) {
             value+=speed;
+            checkValue(true, target);
         }
-        checkValue();
     }
 
     public void animateBiLinear(double target, double speed) {
@@ -71,20 +73,21 @@ public class Animation {
         }
 
         if (target < value) {
-            System.out.println(value-min);
             value -= (((value-min)*multiplier)+speed)*Window.getScreen().fps;
             if (value < target) {
+                System.out.println("a");
                 value = target;
             }
+            checkValue(false, target);
         }
         else if (target > value) {
-            System.out.println(max-value);
             value += (((max-value)*multiplier)+speed)*Window.getScreen().fps;
             if (value > target) {
+                System.out.println("b");
                 value = target;
             }
+            checkValue(true, target);
         }
-        checkValue();
     }
 
     public void animationInverseBiLinear(double target, double speed) {
@@ -137,6 +140,12 @@ public class Animation {
 
     public double getOffset(double offset) {
         return Math.max(Math.min((value-offset)/(max-offset), max), min);
+    }
+
+    private void checkValue(boolean increasing, double target) {
+        if (increasing) this.value = Math.min(target, this.value);
+        else this.value = Math.max(target, this.value);
+        this.value = Math.max(Math.min(value, max), min);
     }
 
     private void checkValue() {
