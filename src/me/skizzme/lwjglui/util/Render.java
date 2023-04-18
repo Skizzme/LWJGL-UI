@@ -157,13 +157,13 @@ public class Render {
         glDisable(GL_BLEND);
     }
 
-    public static void drawCircle(double x,double y, double radius, double increment, boolean fill, int color, int completion) {
+    public static void drawCircle(double x,double y, double radius, double increment, int lineWidth, boolean fill, int color, int completion) {
         if (fill) {
             drawRoundedRect(x-radius, y-radius, x+radius, y+radius, radius*2, color, increment);
         }
         else{
             glEnable(GL_LINE_SMOOTH);
-            glLineWidth(2);
+            glLineWidth(lineWidth);
             glColor(color);
             glBegin(GL_LINE_STRIP);
             for (double i = 0; i <= completion; i += increment) {

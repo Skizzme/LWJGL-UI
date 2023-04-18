@@ -73,20 +73,18 @@ public class Animation {
         }
 
         if (target < value) {
-            value -= (((value-min)*multiplier)+speed)*Window.getScreen().fps;
+            value += (((target-value)*multiplier)+speed)*Window.getScreen().fps;
             if (value < target) {
-                System.out.println("a");
                 value = target;
             }
             checkValue(false, target);
         }
         else if (target > value) {
-            value += (((max-value)*multiplier)+speed)*Window.getScreen().fps;
+            value += (((target-value)*multiplier)+speed)*Window.getScreen().fps;
             if (value > target) {
-                System.out.println("b");
                 value = target;
             }
-            checkValue(true, target);
+            checkValue   (true, target);
         }
     }
 

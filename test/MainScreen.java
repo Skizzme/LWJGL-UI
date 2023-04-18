@@ -1,9 +1,6 @@
 import me.skizzme.lwjglui.GuiScreen;
 import me.skizzme.lwjglui.Window;
-import me.skizzme.lwjglui.elements.impl.DefaultCheckbox;
-import me.skizzme.lwjglui.elements.impl.DefaultLoadbar;
-import me.skizzme.lwjglui.elements.impl.DefaultMultipleChoice;
-import me.skizzme.lwjglui.elements.impl.DefaultTextbox;
+import me.skizzme.lwjglui.elements.impl.*;
 import me.skizzme.lwjglui.fonts.FontUtil;
 import me.skizzme.lwjglui.fonts.TTFFontRenderer;
 import me.skizzme.lwjglui.util.Render;
@@ -31,6 +28,7 @@ public class MainScreen extends GuiScreen {
         this.elements.add(new DefaultMultipleChoice(-1, 0xff606060, -1, -1, 100, 80, 10, 10, "op1", "op2", "op3"));
         this.loadbar = new DefaultLoadbar(0, -1, 0xff606060, 50, 120, 100, 10);
         this.elements.add(loadbar);
+        this.elements.add(new DefaultLoadcircle(65, 150, 8));
     }
 
     @Override
@@ -53,8 +51,8 @@ public class MainScreen extends GuiScreen {
         if (this.startTime == -1) {
             this.startTime = this.lastFrame;
         }
-        if (System.currentTimeMillis()-lastSet >= 5000) {
-            value+=0.1;
+        if (System.currentTimeMillis()-lastSet >= 250) {
+            value+=5;
             System.out.println(value);
             this.loadbar.update(value);
             lastSet = System.currentTimeMillis();

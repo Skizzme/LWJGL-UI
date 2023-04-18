@@ -55,7 +55,7 @@ public class Window {
         try {
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setResizable(false);
-            Display.create(new PixelFormat());
+            Display.create(new PixelFormat(8,0,0,8));
             FontUtil.loadDefaultFont();
         } catch (LWJGLException e) {
             e.printStackTrace();
