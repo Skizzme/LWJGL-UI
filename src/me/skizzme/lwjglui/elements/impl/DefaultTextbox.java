@@ -6,6 +6,7 @@ import me.skizzme.lwjglui.fonts.FontUtil;
 import me.skizzme.lwjglui.fonts.TTFFontRenderer;
 import me.skizzme.lwjglui.keyboard.KeyboardHelper;
 import me.skizzme.lwjglui.util.Animation;
+import me.skizzme.lwjglui.util.GlTransformation;
 import me.skizzme.lwjglui.util.Render;
 
 import java.util.ArrayList;
@@ -17,23 +18,40 @@ public class DefaultTextbox extends Element {
     private Animation caretAnimation;
     private long last_type_time = System.currentTimeMillis();
 
-    public DefaultTextbox(int color, int backgroundColor, int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public DefaultTextbox(int color, int backgroundColor, int x, int y, int width) {
+        super(x, y, width, 13);
         this.color = color;
         this.backgroundColor = backgroundColor;
         caretAnimation = new Animation(x, 0, Window.window().width);
     }
 
+    public String input() {
+        return input;
+    }
+
     @Override
     public void draw(int mouseX, int mouseY) {
-        this.selected = true;
+        super.draw(mouseX, mouseY);
         Render.drawRect(x, y, x+width, y+height, color);
         Render.drawRect(x+0.5, y+0.5, x+width-0.5, y+height-0.5, backgroundColor);
         TTFFontRenderer tf = FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 20);
-        tf.drawString(input, x+2, y, -1);
+        float w = tf.getWidth(input);
+        if (w > this.width) {
+            Render.initMask();
+            Render.drawRect(x, y, x+width, y+height, -1);
+            Render.useMask();
+            GlTransformation t1 = GlTransformation.transform(-(w-this.width), 0);
+            t1.apply();
+            tf.drawString(input, x+1, y+2, -1);
+            t1.remove();
+            Render.disableMask();
+        } else {
+            tf.drawString(input, x+1, y+2, -1);
+        }
         float st = tf.getWidth(input.substring(0, caretPosition))-2;
         caretAnimation.animateBiLinearNoMaxMin(x+st, 0.001, 1);
-        if ((System.currentTimeMillis()-this.last_type_time) % 1000 < 500) Render.drawRect(caretAnimation.getValue()+1, y, caretAnimation.getValue()+1.5, y+tf.getHeight("a"), -1);
+        double cX = Math.min(caretAnimation.getValue()+1-Math.max(w-this.width, 0), this.width+x-0.5);
+        if ((System.currentTimeMillis()-this.last_type_time) % 1000 < 500 && this.selected) Render.drawRect(cX, y+1.5, cX+0.5, y+tf.getHeight("a")+1.5, -1);
     }
 
     private int[] getCtrlDeleteWord() {
@@ -57,7 +75,14 @@ public class DefaultTextbox extends Element {
     }
 
     @Override
+    public void mouseClick(int button, boolean state, int mouseX, int mouseY) {
+        super.mouseClick(button, state, mouseX, mouseY);
+        this.selected = hovering(mouseX, mouseY);
+    }
+
+    @Override
     public void key(int keyCode, char charIn, boolean pressed) {
+        super.key(keyCode, charIn, pressed);
         caretPosition = Math.max(caretPosition, 0);
 
         if (pressed) {

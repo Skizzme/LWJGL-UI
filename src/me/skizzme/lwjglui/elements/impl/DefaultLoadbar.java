@@ -18,6 +18,7 @@ public class DefaultLoadbar extends Element {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         progress.animateBiLinear(targetProgress, 1, 0.5);
 //        System.out.println(progress.getValue());
         Render.drawRect(x, y, x+width, y+height, color);

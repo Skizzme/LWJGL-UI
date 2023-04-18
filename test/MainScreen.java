@@ -23,7 +23,7 @@ public class MainScreen extends GuiScreen {
 
     @Override
     public void initGui() {
-        this.elements.add(new DefaultTextbox(-2, 0xff606060, 50, 50, 100, 20));
+        this.elements.add(new DefaultTextbox(-2, 0xff606060, 50, 50, 100));
         this.elements.add(new DefaultCheckbox("Test", -1, 0xff606060, -1, false, 50, 80, 10, 10));
         this.elements.add(new DefaultMultipleChoice(-1, 0xff606060, -1, -1, 100, 80, 10, 10, "op1", "op2", "op3"));
         this.loadbar = new DefaultLoadbar(0, -1, 0xff606060, 50, 120, 100, 10);

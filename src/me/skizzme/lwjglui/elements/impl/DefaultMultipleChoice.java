@@ -26,8 +26,13 @@ public class DefaultMultipleChoice extends Element {
         }
     }
 
+    public int selected() {
+        return selected;
+    }
+
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         for (int i = 0; i < options.length; i++) {
             String option = options[i];
             int offset = i*(optionHeight+3);
@@ -42,8 +47,8 @@ public class DefaultMultipleChoice extends Element {
     }
 
     @Override
-    public void click(int button, boolean state, int mouseX, int mouseY) {
-        super.click(button, state, mouseX, mouseY);
+    public void clicked(int button, boolean state, int mouseX, int mouseY) {
+        super.clicked(button, state, mouseX, mouseY);
         if (button == 1) selected = -1;
         else {
             for (int i = 0; i < options.length; i++) {

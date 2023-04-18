@@ -31,7 +31,8 @@ public abstract class GuiScreen {
 
     public void handleClick(int button, boolean state, int mouseX, int mouseY) {
         for (Element element : elements) {
-            if (element.hovering(mouseX, mouseY)) element.click(button, state, mouseX, mouseY);
+            if (element.hovering(mouseX, mouseY)) element.clicked(button, state, mouseX, mouseY);
+            element.mouseClick(button, state, mouseX, mouseY);
         }
     }
 

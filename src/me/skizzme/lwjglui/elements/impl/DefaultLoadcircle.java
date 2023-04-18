@@ -17,6 +17,7 @@ public class DefaultLoadcircle extends Element {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         if (expand.getValue() >= 180) {
             expand.animateBiLinear(360, 2, 0.8);
         } else {

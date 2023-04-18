@@ -21,8 +21,13 @@ public class DefaultCheckbox extends Element {
         this.fontHeight = FontUtil.getDefaultFont().getHeight(name);
     }
 
+    public boolean selected() {
+        return state;
+    }
+
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         Render.drawRect(x, y, x+width, y+height, color);
         Render.drawRect(x+0.5, y+0.5, x+width-0.5, y+height-0.5, backgroundColor);
         if (state) {
@@ -33,8 +38,8 @@ public class DefaultCheckbox extends Element {
     }
 
     @Override
-    public void click(int button, boolean state, int mouseX, int mouseY) {
-        super.click(button, state, mouseX, mouseY);
+    public void clicked(int button, boolean state, int mouseX, int mouseY) {
+        super.clicked(button, state, mouseX, mouseY);
         this.state = !this.state;
     }
 }

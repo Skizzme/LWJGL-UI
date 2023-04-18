@@ -23,9 +23,9 @@ public class DefaultLoadcircle2 extends Element {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         if (expandState) {
             expand.animateBiLinear(0, 5, 0.7);
-            System.out.println(expand.getValue());
             if (expand.getValue() == 0) {
                 expandState = false;
             }

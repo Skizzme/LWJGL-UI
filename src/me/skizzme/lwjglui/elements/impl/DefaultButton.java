@@ -21,6 +21,7 @@ public class DefaultButton extends Element {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        super.draw(mouseX, mouseY);
         if (this.hovering(mouseX, mouseY)) {
             Render.drawRect(x, y, x+height, y+width, hoverColor);
         } else {
@@ -29,7 +30,8 @@ public class DefaultButton extends Element {
     }
 
     @Override
-    public void click(int button, boolean state, int mouseX, int mouseY) {
+    public void clicked(int button, boolean state, int mouseX, int mouseY) {
+        super.clicked(button, state, mouseX, mouseY);
         executor.accept(button, state);
     }
 
