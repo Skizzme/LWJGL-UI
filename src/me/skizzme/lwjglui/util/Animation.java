@@ -73,7 +73,7 @@ public class Animation {
         }
 
         if (target < value) {
-            value += (((target-value)*multiplier)+speed)*Window.getScreen().fps;
+            value += (((target-value)*multiplier)-speed)*Window.getScreen().fps;
             if (value < target) {
                 value = target;
             }
