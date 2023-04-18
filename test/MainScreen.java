@@ -28,7 +28,7 @@ public class MainScreen extends GuiScreen {
         this.elements.add(new DefaultMultipleChoice(-1, 0xff606060, -1, -1, 100, 80, 10, 10, "op1", "op2", "op3"));
         this.loadbar = new DefaultLoadbar(0, -1, 0xff606060, 50, 120, 100, 10);
         this.elements.add(loadbar);
-        this.elements.add(new DefaultLoadcircle(65, 150, 8));
+        this.elements.add(new DefaultLoadcircle2(-1, 65, 150, 8));
     }
 
     @Override

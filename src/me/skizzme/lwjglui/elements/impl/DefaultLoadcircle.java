@@ -23,7 +23,7 @@ public class DefaultLoadcircle extends Element {
             expand.animationInverseBiLinear(180, 7, 0.6);
         }
         if (expand.getValue() == 360) {
-            expand.setValue(13);
+            expand.setValue(23);
         }
         if (rotation.getValue() == 360) {
             rotation.setValue(0);
@@ -32,7 +32,7 @@ public class DefaultLoadcircle extends Element {
         GlTransformation t1 = GlTransformation.rotationWithAxis(rotation.getValue(), 0, 0, 1, x, y);
 
         t1.apply();
-        Render.drawCircle(0, 0, width, 5, 4, false, -1, (int) expand.getValue()+8);
+        Render.drawCircle(0, 0, width, 5, 4, false, -1, (int) expand.getValue()+23);
         t1.remove();
     }
 }
