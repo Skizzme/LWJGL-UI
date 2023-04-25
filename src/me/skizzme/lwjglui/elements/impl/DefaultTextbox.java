@@ -9,12 +9,17 @@ import me.skizzme.lwjglui.util.Animation;
 import me.skizzme.lwjglui.util.GlTransformation;
 import me.skizzme.lwjglui.util.Render;
 
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultTextbox extends Element {
     private String input = "";
     private int caretPosition = 0, color, backgroundColor;
+    private int caretOffset = 0;
     private Animation caretAnimation;
     private long last_type_time = System.currentTimeMillis();
 
@@ -45,6 +50,7 @@ public class DefaultTextbox extends Element {
             tf.drawString(input, x+1, y+2, -1);
             t1.remove();
             Render.disableMask();
+//            if
         } else {
             tf.drawString(input, x+1, y+2, -1);
         }
@@ -84,6 +90,7 @@ public class DefaultTextbox extends Element {
     public void key(int keyCode, char charIn, boolean pressed) {
         super.key(keyCode, charIn, pressed);
         caretPosition = Math.max(caretPosition, 0);
+        System.out.println(keyCode);
 
         if (pressed) {
             this.last_type_time = System.currentTimeMillis();
@@ -108,6 +115,18 @@ public class DefaultTextbox extends Element {
                         }
                     } else if (keyCode == 211 && caretPosition != input.length()) {
                         input = input.substring(0, caretPosition) + input.substring(caretPosition+1);
+                    }
+                }
+
+                if (KeyboardHelper.ctrl() && keyCode == 47) {
+                    try {
+                        String clipboardData = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+                        input = input.substring(0, caretPosition) + clipboardData + input.substring(caretPosition);
+                        caretPosition+=clipboardData.length();
+                    } catch (UnsupportedFlavorException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
 
