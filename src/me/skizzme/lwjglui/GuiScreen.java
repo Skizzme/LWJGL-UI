@@ -23,12 +23,18 @@ public abstract class GuiScreen {
 
     public void initGui() {}
 
+    /***
+     * Requires super
+     */
     public void drawScreen(int mouseX, int mouseY) {
         for (Element element : elements) {
             element.draw(mouseX, mouseY);
         }
     }
 
+    /***
+     * Requires super
+     */
     public void handleClick(int button, boolean state, int mouseX, int mouseY) {
         for (Element element : elements) {
             if (element.hovering(mouseX, mouseY)) element.clicked(button, state, mouseX, mouseY);
@@ -36,6 +42,9 @@ public abstract class GuiScreen {
         }
     }
 
+    /***
+     * Requires super
+     */
     public void keyState(int keyCode, char charIn, boolean state) {
         for (Element element : elements) {
             if (element.isSelected()) element.key(keyCode, charIn, state);

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="LWJGL-UI:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/LWJGL_UI_jar</output-path>
+  <artifact type="jar" name="LWJGL-UI-test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LWJGL_UI_test_jar</output-path>
     <root id="archive" name="LWJGL-UI.jar">
       <element id="module-output" name="LWJGL-UI" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../Libraries/slick/slick.jar" path-in-jar="/" />
@@ -13,6 +13,7 @@
       <element id="directory" name="natives">
         <element id="dir-copy" path="$PROJECT_DIR$/../Libraries/lwjgl-2.9.3/native" />
       </element>
+      <element id="module-test-output" name="LWJGL-UI" />
     </root>
   </artifact>
 </component>

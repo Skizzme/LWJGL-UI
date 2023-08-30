@@ -141,6 +141,7 @@ public class Render {
         glVertex2d(left, top);
         glEnd();
         glDisable(GL_BLEND);
+
     }
 
     public static void drawHorizontalGradient(double left, double top, double right, double bottom, int leftColor, int rightColor) {

@@ -33,6 +33,7 @@ public class Window {
     private long lastRepeat = System.currentTimeMillis();
     public int fps = 144;
     private boolean running = false;
+    private float backgroundRed = 0.0784f, backgroundGreen = 0.082f, backgroundBlue = 0.09f;
 
     public Window(String title, int width, int height, boolean borderless) {
         this.title = title;
@@ -45,13 +46,19 @@ public class Window {
         Window.window = this;
     }
 
+    public void setBackground(float red, float green, float blue) {
+        this.backgroundRed = red;
+        this.backgroundGreen = green;
+        this.backgroundBlue = blue;
+    }
+
     public static Window window() {
         return window;
     }
 
     public void createDisplay() {
         Display.setTitle(this.title);
-        Display.setInitialBackground(0.0784f,0.082f,0.09f);
+        Display.setInitialBackground(backgroundRed,backgroundGreen,backgroundBlue);
         try {
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setResizable(false);

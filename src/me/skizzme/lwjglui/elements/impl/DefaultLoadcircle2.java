@@ -30,7 +30,7 @@ public class DefaultLoadcircle2 extends Element {
                 expandState = false;
             }
         } else {
-            expand.animateLinear(360, 50);
+            expand.animateLinear(360, 30);
 //            if (expand.getValue() >= 180) {
 //                expand.animateBiLinear(360, 0.8, 0.3);
 //            } else {
