@@ -17,10 +17,10 @@ public class FontUtil {
     private static final HashSet<String> loadingFonts = new HashSet<>();
 
     public static void loadDefaultFont() {
-        defaultFont = createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 20);
+        defaultFont = createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 20, false);
     }
 
-    public static TTFFontRenderer createFont(String fontPath, int size) {
+    public static TTFFontRenderer createFont(String fontPath, int size, boolean renderWhileLoad) {
         if (loadingFonts.contains(fontPath + size)) {
             return null;
         }
@@ -33,10 +33,10 @@ public class FontUtil {
             InputStream istream = FontUtil.class.getResourceAsStream(fontPath);
             Font myFont = Font.createFont(Font.PLAIN, istream);
             myFont = myFont.deriveFont(Font.PLAIN, size);
-            TTFFontRenderer fontr = new TTFFontRenderer(myFont);
+            TTFFontRenderer fontr = new TTFFontRenderer(myFont, renderWhileLoad);
 
             fonts.put(fontPath + size, fontr);
-            System.out.println("Loaded " + fontPath + " with size " + size);
+            System.out.println("Loaded \"" + fontPath + "\" with size " + size);
 
             Window.window().fps = oldFps;
 
@@ -50,9 +50,10 @@ public class FontUtil {
     public static TTFFontRenderer getDefaultFont() {
         return defaultFont;
     }
+
     public static TTFFontRenderer getFont(String fontPath, int size) {
         if (!fonts.containsKey(fontPath+size)) {
-            createFont(fontPath, size);
+            createFont(fontPath, size, true);
         }
         return fonts.getOrDefault(fontPath + size, defaultFont);
     }

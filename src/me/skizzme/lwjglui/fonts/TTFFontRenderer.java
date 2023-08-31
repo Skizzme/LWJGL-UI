@@ -60,20 +60,22 @@ public class TTFFontRenderer {
      * All the color codes used in minecraft.
      */
     private final int[] colorCodes = new int[32];
+    private boolean renderWhileLoad;
 
-    public TTFFontRenderer(Font font) {
-        this(font, 256);
+    public TTFFontRenderer(Font font, boolean renderWhileLoad) {
+        this(font, 256, renderWhileLoad);
     }
 
-    public TTFFontRenderer(Font font, int characterCount) {
-        this(font, characterCount, true);
+    public TTFFontRenderer(Font font, int characterCount, boolean renderWhileLoad) {
+        this(font, characterCount, true, renderWhileLoad);
     }
 
-    public TTFFontRenderer(Font font, boolean antiAlias) {
-        this(font, 256, antiAlias);
+    public TTFFontRenderer(Font font, boolean antiAlias, boolean renderWhileLoad) {
+        this(font, 256, antiAlias, renderWhileLoad);
     }
 
-    public TTFFontRenderer(Font font, int characterCount, boolean antiAlias) {
+    public TTFFontRenderer(Font font, int characterCount, boolean antiAlias, boolean renderWhileLoad) {
+        this.renderWhileLoad = renderWhileLoad;
         this.font = font;
         this.fractionalMetrics = true;
         this.antiAlias = antiAlias;
@@ -83,7 +85,7 @@ public class TTFFontRenderer {
         int[] boldTexturesIds = new int[characterCount];
         int[] italicTexturesIds = new int[characterCount];
         for (int i = 0; i < characterCount; i++) {
-            Window.window().render(true);
+            if (renderWhileLoad) Window.window().render(true);
             regularTexturesIds[i] = GL11.glGenTextures();
             boldTexturesIds[i] = GL11.glGenTextures();
             italicTexturesIds[i] = GL11.glGenTextures();
@@ -120,7 +122,7 @@ public class TTFFontRenderer {
 
         // Iterates through all the characters in the character set of the font renderer.
         for (int index = 0; index < characterData.length; index++) {
-              Window.window().render(true);
+            if (renderWhileLoad) Window.window().render(true);
             // The character at the current index.
             char character = (char) index;
 
@@ -195,7 +197,7 @@ public class TTFFontRenderer {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
 
-                Window.window().render(true);
+                if (renderWhileLoad) Window.window().render(true);
                 // The pixel in the image.
                 int pixel = pixels[y * image.getWidth() + x];
 

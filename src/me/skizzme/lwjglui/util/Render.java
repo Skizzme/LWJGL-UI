@@ -1,10 +1,12 @@
 package me.skizzme.lwjglui.util;
 
+import com.sun.prism.paint.Color;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.util.BufferedImageUtil;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.InputStream;
 import java.util.HashMap;
 
@@ -51,6 +53,14 @@ public class Render {
         double green = (hex >> 8 & 255) / 255.0f;
         double blue = (hex & 255) / 255.0f;
         glColor4d(red, green, blue, alpha);
+    }
+
+    public static int hexWithAlpha(int hex, double alpha) {
+        alpha = alpha/255;
+        float red = ((float)(hex >> 16 & 255) / 255.0F);
+        float green = ((float)(hex >> 8 & 255) / 255.0F);
+        float blue = ((float)(hex & 255) / 255.0F);
+        return new Color(red, green, blue, (float) alpha).getIntArgbPre();
     }
 
     public static void drawUnderline(double x, double y, double width, double fade) {

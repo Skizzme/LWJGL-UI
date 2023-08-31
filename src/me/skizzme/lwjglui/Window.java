@@ -3,6 +3,7 @@ package me.skizzme.lwjglui;
 import me.skizzme.lwjglui.fonts.FontUtil;
 import me.skizzme.lwjglui.keyboard.KeyboardHelper;
 import me.skizzme.lwjglui.mouse.MouseHelper;
+import me.skizzme.lwjglui.util.Icons;
 import me.skizzme.lwjglui.util.Render;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -64,6 +65,7 @@ public class Window {
             Display.setResizable(false);
             Display.create(new PixelFormat(8,1,0,8));
             FontUtil.loadDefaultFont();
+            Icons.setup();
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
