@@ -3,7 +3,6 @@ package me.skizzme.lwjglui.elements.impl;
 import me.skizzme.lwjglui.elements.Element;
 import me.skizzme.lwjglui.util.Animation;
 import me.skizzme.lwjglui.util.GlTransformation;
-import me.skizzme.lwjglui.util.Render;
 
 import java.awt.*;
 

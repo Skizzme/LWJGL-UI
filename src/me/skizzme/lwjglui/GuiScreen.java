@@ -55,4 +55,8 @@ public abstract class GuiScreen {
 
     }
 
+    public boolean hovering(double mouseX, double mouseY, double left, double top, double right, double bottom) {
+        return mouseX >= left && mouseY >= top && mouseX <= right && mouseY <= bottom;
+    }
+
 }

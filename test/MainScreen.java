@@ -28,7 +28,7 @@ public class MainScreen extends GuiScreen {
         this.elements.add(new DefaultMultipleChoice(-1, 0xff606060, -1, -1, 100, 80, 10, 10, "op1", "op2", "op3"));
         this.loadbar = new DefaultLoadbar(0, -1, 0xff606060, 50, 120, 100, 10);
         this.elements.add(loadbar);
-        this.elements.add(new DefaultLoadcircle2(-1, 65, 150, 8));
+        this.elements.add(new DefaultLoadcircle2(-1, 165, 150, 8));
     }
 
     @Override
@@ -53,7 +53,6 @@ public class MainScreen extends GuiScreen {
         }
         if (System.currentTimeMillis()-lastSet >= 250) {
             value+=5;
-            System.out.println(value);
             this.loadbar.update(value);
             lastSet = System.currentTimeMillis();
         }
@@ -68,8 +67,9 @@ public class MainScreen extends GuiScreen {
 
         // int i : loaded
         for (int i = 20; i < 35; i++) {
-            TTFFontRenderer tf = FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", (int)(i*1));
+            TTFFontRenderer tf = FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", (int)(i*2));
             tf.drawString("test", 20, 35+(i-20)*10+tf.getHeight("test"), 0xffffffff);
         }
+        FontUtil.getFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 32).drawString("test", 60, 35, 0xffffffff);
     }
 }

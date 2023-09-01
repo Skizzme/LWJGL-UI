@@ -26,7 +26,7 @@ public class Icons {
         idMap.put("terminal", "L");
         idMap.put("undo", "M");
 
-        defaultIcons = FontUtil.createFont("/me/skizzme/lwjglui/assets/icons.ttf", 25, false);
+        defaultIcons = FontUtil.createFont("/me/skizzme/lwjglui/assets/icons.ttf", 25, true);
         sizeMap.put(25, defaultIcons);
     }
 

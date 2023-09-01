@@ -18,7 +18,8 @@ import java.util.Arrays;
 
 public class DefaultTextbox extends Element {
     private String input = "";
-    private int caretPosition = 0, color, backgroundColor;
+    public int color, backgroundColor;
+    private int caretPosition = 0;
     private int caretOffset = 0;
     private Animation caretAnimation;
     private long last_type_time = System.currentTimeMillis();

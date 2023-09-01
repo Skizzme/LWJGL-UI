@@ -33,7 +33,7 @@ public class Window {
     public boolean close = false, closeRequested = false;
     private long lastRepeat = System.currentTimeMillis();
     public int fps = 144;
-    private boolean running = false;
+    private boolean running = false, loading = false, loaded = false;
     private float backgroundRed = 0.0784f, backgroundGreen = 0.082f, backgroundBlue = 0.09f;
 
     public Window(String title, int width, int height, boolean borderless) {
@@ -58,17 +58,17 @@ public class Window {
     }
 
     public void createDisplay() {
+        System.out.println("creating");
         Display.setTitle(this.title);
         Display.setInitialBackground(backgroundRed,backgroundGreen,backgroundBlue);
         try {
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.setResizable(false);
             Display.create(new PixelFormat(8,1,0,8));
-            FontUtil.loadDefaultFont();
-            Icons.setup();
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
+        System.out.println("created");
     }
 
     public void setIcon(String icon_32, String icon_64) {
@@ -84,7 +84,7 @@ public class Window {
     }
 
     public void setScreen(GuiScreen currentScreen) {
-        while (!running) {
+        while (!running || !loaded) {
             try {
                 Thread.sleep(5);
             } catch (InterruptedException e) {
@@ -101,12 +101,20 @@ public class Window {
     }
 
     public void run() {
+        System.out.println("current");
         currentScreen = new DefaultScreen(this);
+        System.out.println("currect");
         Render.textures.clear();
         running = true;
         while (!close) {
             if (Display.isCloseRequested()) {
                 closeRequested = true;
+            }
+            if (!loading) {
+                loading = true;
+                FontUtil.loadDefaultFont();
+                Icons.setup();
+                loaded = true;
             }
             render();
             Display.sync(Display.isActive() ? fps : 30);
@@ -114,9 +122,8 @@ public class Window {
         Display.destroy();
     }
 
-    public void hide() {
+    public void close() {
         this.close = true;
-        Display.destroy();
     }
 
     public void show() {
@@ -133,6 +140,8 @@ public class Window {
         if (currentScreen == null) {
             return;
         }
+        currentScreen.width = this.width;
+        currentScreen.height = this.height;
 
         if (checkFPS && ((double) (System.nanoTime()-currentScreen.lastFrame))/1000000000d < 1d/fps) {
             return;
@@ -143,7 +152,7 @@ public class Window {
         int mouseX = Mouse.getX()/2;
         int mouseY = (height - Mouse.getY())/2;
 
-        if (!Mouse.isCreated() || !Keyboard.isCreated()) {
+        if (!Mouse.isCreated() || !Keyboard.isCreated() || closeRequested) {
             return;
         }
 

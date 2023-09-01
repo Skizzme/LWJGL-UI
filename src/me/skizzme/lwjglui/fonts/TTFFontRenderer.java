@@ -82,17 +82,17 @@ public class TTFFontRenderer {
 
         // Generates all the character textures.
         int[] regularTexturesIds = new int[characterCount];
-        int[] boldTexturesIds = new int[characterCount];
-        int[] italicTexturesIds = new int[characterCount];
+//        int[] boldTexturesIds = new int[characterCount];
+//        int[] italicTexturesIds = new int[characterCount];
         for (int i = 0; i < characterCount; i++) {
             if (renderWhileLoad) Window.window().render(true);
             regularTexturesIds[i] = GL11.glGenTextures();
-            boldTexturesIds[i] = GL11.glGenTextures();
-            italicTexturesIds[i] = GL11.glGenTextures();
+//            boldTexturesIds[i] = GL11.glGenTextures();
+//            italicTexturesIds[i] = GL11.glGenTextures();
         }
         this.regularData = setup(new CharacterData[characterCount], regularTexturesIds, Font.PLAIN);
-        this.boldData = setup(new CharacterData[characterCount], boldTexturesIds, Font.BOLD);
-        this.italicsData = setup(new CharacterData[characterCount], italicTexturesIds, Font.ITALIC);
+//        this.boldData = setup(new CharacterData[characterCount], boldTexturesIds, Font.BOLD);
+//        this.italicsData = setup(new CharacterData[characterCount], italicTexturesIds, Font.ITALIC);
     }
 
     /**

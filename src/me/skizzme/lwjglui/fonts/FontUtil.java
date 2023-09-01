@@ -17,7 +17,7 @@ public class FontUtil {
     private static final HashSet<String> loadingFonts = new HashSet<>();
 
     public static void loadDefaultFont() {
-        defaultFont = createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 20, false);
+        defaultFont = createFont("/me/skizzme/lwjglui/assets/Comfortaa-Regular.ttf", 20, true);
     }
 
     public static TTFFontRenderer createFont(String fontPath, int size, boolean renderWhileLoad) {
